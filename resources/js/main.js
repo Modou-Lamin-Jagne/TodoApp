@@ -24,3 +24,11 @@ document.getElementById('add').addEventListener('click', function() {
       addItem(value);
     }
   });
+
+  function addItem (value) {
+    addItemToDOM(value);
+    document.getElementById('item').value = '';
+  
+    data.todo.push(value);
+    dataObjectUpdated();
+  }
