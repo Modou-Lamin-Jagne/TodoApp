@@ -16,19 +16,37 @@ document.getElementById('add').addEventListener('click', function() {
     if (value) {
       addItem(value);
     }
-  });
+});
 
-  document.getElementById('item').addEventListener('keydown', function (e) {
+document.getElementById('item').addEventListener('keydown', function (e) {
     var value = this.value;
     if ((e.code === 'Enter' || e.code === 'NumpadEnter') && value) {
       addItem(value);
     }
-  });
+});
 
-  function addItem (value) {
+function addItem (value) {
     addItemToDOM(value);
     document.getElementById('item').value = '';
   
     data.todo.push(value);
     dataObjectUpdated();
-  }
+}
+
+function renderTodoList() {
+    if (!data.todo.length && !data.completed.length) return;
+  
+    for (var i = 0; i < data.todo.length; i++) {
+      var value = data.todo[i];
+      addItemToDOM(value);
+    }
+  
+    for (var j = 0; j < data.completed.length; j++) {
+      var value = data.completed[j];
+      addItemToDOM(value, true);
+    }
+}
+
+function dataObjectUpdated() {
+    localStorage.setItem('todoList', JSON.stringify(data));
+}
